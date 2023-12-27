@@ -12,10 +12,10 @@ all : app.hex
 	$(ToolChain)gcc -c $(Target)  $< -o $@
 
 app.elf : $(OBJ_Files)
-	$(ToolChain)ld -Map app.map -T  $(LinkerScript) $< -o $@
+	$(ToolChain)ld -Map app.map -T  $(LinkerScript) $(OBJ_Files) -o $@
 
 app.hex : app.elf 
-	$(ToolChain)objcopy -O ihex $< $@
+	$(ToolChain)objcopy -O ihex app.elf $@
 
 
 clean : 

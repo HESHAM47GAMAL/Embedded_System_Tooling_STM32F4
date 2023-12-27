@@ -1,24 +1,21 @@
+ToolChain 	 	:= arm-none-eabi-
+Target		 	:= -mcpu=cortex-m4 -mthumb
+LinkerScript 	:= LinkerScript_stmf4.ld
+SRC_Files 		:= $(wildcard *.c)
+OBJ_Files 		:= $(SRC_Files:.c=.o)
 
-main.o : main.c
-	arm-none-eabi-gcc -c -mcpu=cortex-m4 -mthumb main.c -o main.o
 
-GPIO_Program.o : GPIO_Program.c
-	arm-none-eabi-gcc -c -mcpu=cortex-m4 -mthumb GPIO_Program.c -o GPIO_Program.o
+all : app.hex
+	@echo "--------- Hex file Generated Successfully ---------"
 
-RCC_Program.o : RCC_Program.c
-	arm-none-eabi-gcc -c -mcpu=cortex-m4 -mthumb RCC_Program.c -o RCC_Program.o
+%.o : %.c
+	$(ToolChain)gcc -c $(Target)  $< -o $@
 
-SYSTICK_Program.o : SYSTICK_Program.c
-	arm-none-eabi-gcc -c -mcpu=cortex-m4 -mthumb SYSTICK_Program.c -o SYSTICK_Program.o
-
-StartupCode_stm32f401xx.o : StartupCode_stm32f401xx.c
-	arm-none-eabi-gcc -c -mcpu=cortex-m4 -mthumb StartupCode_stm32f401xx.c -o StartupCode_stm32f401xx.o
-
-app.elf : main.o GPIO_Program.o RCC_Program.o StartupCode_stm32f401xx.o SYSTICK_Program.o LinkerScript_stmf4.ld
-	arm-none-eabi-ld -Map app.map -T LinkerScript_stmf4.ld  main.o GPIO_Program.o RCC_Program.o StartupCode_stm32f401xx.o SYSTICK_Program.o -o app.elf
+app.elf : $(OBJ_Files)
+	$(ToolChain)ld -Map app.map -T  $(LinkerScript) $< -o $@
 
 app.hex : app.elf 
-	arm-none-eabi-objcopy -O ihex app.elf app.hex
+	$(ToolChain)objcopy -O ihex $< $@
 
 
 clean : 

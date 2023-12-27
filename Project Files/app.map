@@ -1,0 +1,87 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+RAM              0x20000000         0x00010000         xrw
+FLASH            0x08000000         0x00040000         xr
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+                0x20010000                _estack = (ORIGIN (RAM) + LENGTH (RAM))
+
+.isr_vector
+ *(.isr_vector)
+ *(.isr_vector*)
+
+.init
+ *(.init)
+ *(.init*)
+
+.text           0x08000000      0xcac
+ *(.text)
+ .text          0x08000000      0xcac GPIO_Program.o
+                0x08000000                GPIO_voidPinInit
+                0x0800006e                GPIO_voidSetPinMode
+                0x0800038c                GPIO_voidSetPinType
+                0x080006d0                GPIO_voidSetPinSpeed
+                0x08000940                GPIO_voidPortInit
+                0x080009a8                GPIO_voidSetPortMode
+                0x080009e0                GPIO_voidSetPortType
+                0x08000a18                GPIO_voidSetPortSpeed
+                0x08000a50                GPIO_voidSetPinValueNonAtomic
+                0x08000b54                GPIO_voidSetPinValueAtomic
+                0x08000c1c                GPIO_u8GetPinValue
+ *(.text*)
+                0x08000cac                _sdata_flash = LOADADDR (.data)
+
+.glue_7         0x08000cac        0x0
+ .glue_7        0x08000cac        0x0 linker stubs
+
+.glue_7t        0x08000cac        0x0
+ .glue_7t       0x08000cac        0x0 linker stubs
+
+.vfp11_veneer   0x08000cac        0x0
+ .vfp11_veneer  0x08000cac        0x0 linker stubs
+
+.v4_bx          0x08000cac        0x0
+ .v4_bx         0x08000cac        0x0 linker stubs
+
+.iplt           0x08000cac        0x0
+ .iplt          0x08000cac        0x0 GPIO_Program.o
+
+.rel.dyn        0x08000cac        0x0
+ .rel.iplt      0x08000cac        0x0 GPIO_Program.o
+
+.data           0x20000000        0x0 load address 0x08000cac
+                0x20000000                _sdata = .
+ *(.data)
+ .data          0x20000000        0x0 GPIO_Program.o
+ *(.data*)
+                0x20000000                _edata = .
+
+.igot.plt       0x20000000        0x0 load address 0x08000cac
+ .igot.plt      0x20000000        0x0 GPIO_Program.o
+
+.bss            0x20000000        0x0 load address 0x08000cac
+                0x20000000                _sbss = .
+ *(.bss)
+ .bss           0x20000000        0x0 GPIO_Program.o
+ *(.bss*)
+                0x20000000                _ebss = .
+
+.rodata
+ *(.rodata)
+ *(.rodata*)
+LOAD GPIO_Program.o
+OUTPUT(app.elf elf32-littlearm)
+LOAD linker stubs
+
+.comment        0x00000000       0x49
+ .comment       0x00000000       0x49 GPIO_Program.o
+                                 0x4a (size before relaxing)
+
+.ARM.attributes
+                0x00000000       0x2e
+ .ARM.attributes
+                0x00000000       0x2e GPIO_Program.o

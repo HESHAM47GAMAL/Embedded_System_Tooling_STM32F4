@@ -13,7 +13,7 @@
 <p>Then want to make it more easier as when only click on file make everything and generate Hex file from one press using Batch file</p>
 
 ## Schematic
-
+<img src= "https://github.com/HESHAM47GAMAL/Embedded_System_Tooling_STM32F4/blob/main/Schematic.png">
 
 ## Dependency 
 <p>To be able to use this project you should have arm compiler toolchain</p>

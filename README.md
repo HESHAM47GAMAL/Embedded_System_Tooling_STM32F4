@@ -1,6 +1,10 @@
 # Embedded_System_Tooling_STM32F4
 - [Description](#Description)
+<<<<<<< HEAD
 - [Schematic](#Schematic)
+=======
+- [Dependency](#Dependency)
+>>>>>>> 6d6478e70b51d99061678b27a1bb664524414e8f
 - [Demo](#Demo)
 
 
@@ -11,12 +15,21 @@
 <p>as make compilation process for each file By own self is difficult so learn Makefile to make it easier </p>
 <p>Then want to make it more easier as when only click on file make everything and generate Hex file from one press using Batch file</p>
 
+<<<<<<< HEAD
 ## Schematic
 
 
+=======
+## Dependency 
+<p>To be able to use this project you should have arm compiler toolchain</p>
+<P>If you don't have follow this link to download it Now <a href="https://developer.arm.com/downloads/-/gnu-rm">🔗Press</a> <p>
+>>>>>>> 6d6478e70b51d99061678b27a1bb664524414e8f
 
 ## Demo
 
 https://github.com/HESHAM47GAMAL/Embedded_System_Tooling_STM32F4/assets/77234053/f85b24a3-62bc-4017-867c-417f2e34638e
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 6d6478e70b51d99061678b27a1bb664524414e8f
